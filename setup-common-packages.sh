@@ -109,10 +109,11 @@ fi
 # uv (Python package manager)
 #---------------------------
 echo "🐍 Installing uv..."
-# The installer auto-updates PATH in your shell rc (zsh/bash) if possible
 curl -LsSf https://astral.sh/uv/install.sh | sh
 
-# Attempt to source the user’s rc now to get uv on PATH immediately
+# TEMPORARY FIX: Turn off 'unbound variable' check so we can source rc files safely
+set +u 
+
 case "$CURRENT_SHELL" in
   zsh)
     [[ -f "$HOME/.zshrc" ]] && . "$HOME/.zshrc" || true
@@ -124,6 +125,9 @@ case "$CURRENT_SHELL" in
     [[ -f "$HOME/.profile" ]] && . "$HOME/.profile" || true
     ;;
 esac
+
+# Turn strict mode back ON
+set -u
 
 echo "🔎 uv version: $(command -v uv >/dev/null 2>&1 && uv --version || echo 'uv will be on PATH in a new shell')"
 
