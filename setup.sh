@@ -67,8 +67,22 @@ fi
 
 # 3. Docker
 echo "🐳 Installing Docker..."
+# Remove old standalone docker-compose (V1) if present to avoid conflicts with V2 plugin
+if command -v docker-compose &> /dev/null; then
+    echo "🗑️ Removing old docker-compose (V1)..."
+    $SUDO apt remove -y docker-compose || true
+fi
+
+echo "📦 Installing docker.io and docker-compose-v2..."
 $SUDO apt install -y docker.io docker-compose-v2
+
+echo "⚙️ Configuring Docker service..."
+# Robustness: Fix for "Device or resource busy" socket error
+$SUDO systemctl stop docker.socket 2>/dev/null || true
+$SUDO systemctl stop docker.service 2>/dev/null || true
+$SUDO systemctl daemon-reload
 $SUDO systemctl enable --now docker
+
 if ! id -nG "$USER" | grep -qw docker; then
   $SUDO usermod -aG docker "$USER"
 fi
@@ -96,7 +110,17 @@ echo "🧱 Installing Apache2 & PHP..."
 $SUDO apt install -y apache2 php libapache2-mod-php
 $SUDO systemctl enable --now apache2
 
+# 7. Cleanup & Maintenance
+echo "🧼 Cleaning up unnecessary packages..."
+$SUDO apt autoremove -y
+
 echo -e "\n✅ Setup complete!"
+
+# Check for pending reboot (kernel upgrade)
+if [ -f /var/run/reboot-required ]; then
+    echo "⚠️  WARNING: A system reboot is required to finish installing updates/kernel."
+    echo "👉 Please run: sudo reboot"
+fi
 echo "🔎 Node: $(node -v)"
 echo "🔎 uv:   $(uv --version)"
 echo "🔎 PHP:  $(php -v | head -n1)"
