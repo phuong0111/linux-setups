@@ -12,64 +12,34 @@ Get your environment up and running beautifully in just a few commands.
 
 ## 🚀 Quick Start
 
-### 🖥️ Terminal Setup (Zsh + Plugins)
+### ⚡ Full Environment Setup
+
+This script sets up your **Zsh terminal** (with Agnoster and plugins) as well as the **Developer Stack** (Docker, Node.js, uv, Apache2, PHP).
 
 ```bash
-wget https://raw.githubusercontent.com/phuong0111/linux-setups/main/setup-terminal.sh
-chmod +x setup-terminal.sh
-./setup-terminal.sh
+wget https://raw.githubusercontent.com/phuong0111/linux-setups/main/setup.sh
+chmod +x setup.sh
+./setup.sh
 chsh -s $(which zsh)
 zsh
-source ~/.zshrc
-````
-
-> 💡 After installation, your terminal will open in **Zsh** with:
->
-> * Auto-suggestions
-> * Auto-completion
-> * Syntax highlighting
-> * A modern Agnoster theme with Powerline fonts
-
----
-
-### 🧰 Common Developer Stack Setup
-
-This script installs **Docker**, **Node.js (via nvm)**, **uv**, **Apache2**, and **PHP** — the essentials for full-stack web development.
-
-```bash
-wget https://raw.githubusercontent.com/phuong0111/linux-setups/main/setup-common-packages.sh
-chmod +x setup-common-packages.sh
-./setup-common-packages.sh
 ```
 
-> 💡 This script sets up everything you need for web, AI, or backend development.
+> 💡 After installation, your terminal will open in **Zsh** with all developer tools ready for web, AI, or backend development.
 
 ---
 
 ## ✨ Features
 
-### 🧩 setup-terminal.sh
+### 🛠️ setup.sh (Unified Setup)
 
-* Installs **Oh My Zsh** automatically
-* Adds essential **Zsh plugins**:
-
-  * `zsh-autosuggestions`
-  * `zsh-syntax-highlighting`
-  * `fast-syntax-highlighting`
-  * `zsh-autocomplete`
-* Configures **Agnoster** theme with Powerline fonts
-* Safely updates `.zshrc` with backup
-* Detects and skips existing installations
-
-### ⚙️ setup-common-packages.sh
-
-* 📦 Updates apt repositories
-* 🐳 Installs **Docker** and **docker-compose**, and adds current user to `docker` group
-* 🟢 Installs **Node.js 24** and **npm 11** using **nvm**
-* 🐍 Installs **uv** (Python package manager from Astral)
-* 🧱 Installs **Apache2** and **PHP** with `libapache2-mod-php`
-* 🌐 Optionally enables **UFW** firewall rules for Apache
-* 🧩 Automatically sources environment files for `nvm` and `uv`
+* 🎨 **Terminal setup**: Installs Oh My Zsh, Agnoster theme with Powerline fonts, and essential Zsh plugins (`zsh-autosuggestions`, `zsh-syntax-highlighting`, `fast-syntax-highlighting`, `zsh-autocomplete`). Safely updates `.zshrc` with a backup.
+* 📦 **Base tools**: Updates apt repositories and installs `curl`, `git`, and build tools.
+* 🐳 **Docker**: Installs Docker and `docker-compose`, configures `docker` group for current user.
+* 🟢 **Node.js**: Installs Node 24 and npm 11 using `nvm`.
+* 🐍 **Python manager**: Installs `uv` from Astral.
+* 🧱 **Web Server**: Installs Apache2 and PHP (`libapache2-mod-php`).
+* 🌐 Optionally enables **UFW** firewall rules for Apache (requires manual explicit enable).
+* 🧩 Automatically sources environment files for `nvm` and `uv`.
 
 ---
 
