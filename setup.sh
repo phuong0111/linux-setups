@@ -4,6 +4,20 @@ set -eo pipefail
 
 echo "🚀 Starting full environment setup..."
 
+# --- Configuration ---
+ZSH_THEME="agnoster"
+# List of plugins (both built-in and external)
+ZSH_PLUGINS="git docker docker-compose zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete"
+
+# External plugins to be cloned (name and repository URL)
+declare -A EXTERNAL_PLUGINS=(
+    ["zsh-autosuggestions"]="https://github.com/zsh-users/zsh-autosuggestions.git"
+    ["zsh-syntax-highlighting"]="https://github.com/zsh-users/zsh-syntax-highlighting.git"
+    ["fast-syntax-highlighting"]="https://github.com/zdharma-continuum/fast-syntax-highlighting.git"
+    ["zsh-autocomplete"]="https://github.com/marlonrichert/zsh-autocomplete.git"
+)
+# ---------------------
+
 # Check if running on a Debian/Ubuntu system
 if ! command -v apt &> /dev/null; then
     echo "❌ This script requires apt package manager (Debian/Ubuntu)"
@@ -32,25 +46,23 @@ fi
 
 ZSH_CUSTOM=${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}
 
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autosuggestions" ]; then
-    git clone https://github.com/zsh-users/zsh-autosuggestions.git "$ZSH_CUSTOM/plugins/zsh-autosuggestions"
-fi
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting" ]; then
-    git clone https://github.com/zsh-users/zsh-syntax-highlighting.git "$ZSH_CUSTOM/plugins/zsh-syntax-highlighting"
-fi
-if [ ! -d "$ZSH_CUSTOM/plugins/fast-syntax-highlighting" ]; then
-    git clone https://github.com/zdharma-continuum/fast-syntax-highlighting.git "$ZSH_CUSTOM/plugins/fast-syntax-highlighting"
-fi
-if [ ! -d "$ZSH_CUSTOM/plugins/zsh-autocomplete" ]; then
-    git clone --depth 1 https://github.com/marlonrichert/zsh-autocomplete.git "$ZSH_CUSTOM/plugins/zsh-autocomplete"
-fi
+for plugin in "${!EXTERNAL_PLUGINS[@]}"; do
+    if [ ! -d "$ZSH_CUSTOM/plugins/$plugin" ]; then
+        echo "🔌 Installing external plugin: $plugin"
+        git clone "${EXTERNAL_PLUGINS[$plugin]}" "$ZSH_CUSTOM/plugins/$plugin"
+    fi
+done
 
-# Backup existing .zshrc and update it
-if [ -f "$HOME/.zshrc" ] && ! grep -q "zsh-autosuggestions" "$HOME/.zshrc" 2>/dev/null; then
-    echo "💾 Updating .zshrc configuration..."
-    cp "$HOME/.zshrc" "$HOME/.zshrc.backup"
-    sed -i 's/^plugins=(git)$/plugins=(git zsh-autosuggestions zsh-syntax-highlighting fast-syntax-highlighting zsh-autocomplete)/' "$HOME/.zshrc"
-    sed -i 's/^ZSH_THEME="robbyrussell"$/ZSH_THEME="agnoster"/' "$HOME/.zshrc"
+# Update .zshrc configuration
+if [ -f "$HOME/.zshrc" ]; then
+    echo "⚙️  Updating .zshrc configuration..."
+    [ ! -f "$HOME/.zshrc.backup" ] && cp "$HOME/.zshrc" "$HOME/.zshrc.backup"
+    
+    # Update plugins line
+    sed -i "s/^plugins=(.*)$/plugins=($ZSH_PLUGINS)/" "$HOME/.zshrc"
+    
+    # Update theme
+    sed -i "s/^ZSH_THEME=.*$/ZSH_THEME=\"$ZSH_THEME\"/" "$HOME/.zshrc"
 fi
 
 # 3. Docker

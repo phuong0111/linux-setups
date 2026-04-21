@@ -1,8 +1,3 @@
-Perfect — here’s the **updated full README.md** that includes both scripts:
-
----
-
-````markdown
 # 🧠 Fascinating Linux Setup Scripts
 
 A collection of powerful setup scripts for Debian/Ubuntu systems — from **terminal customization** to **developer stack installation** — all in one place.  
@@ -32,14 +27,14 @@ zsh
 
 ### 🛠️ setup.sh (Unified Setup)
 
-* 🎨 **Terminal setup**: Installs Oh My Zsh, Agnoster theme with Powerline fonts, and essential Zsh plugins (`zsh-autosuggestions`, `zsh-syntax-highlighting`, `fast-syntax-highlighting`, `zsh-autocomplete`). Safely updates `.zshrc` with a backup.
-* 📦 **Base tools**: Updates apt repositories and installs `curl`, `git`, and build tools.
-* 🐳 **Docker**: Installs Docker and `docker-compose`, configures `docker` group for current user.
-* 🟢 **Node.js**: Installs Node 24 and npm 11 using `nvm`.
-* 🐍 **Python manager**: Installs `uv` from Astral.
-* 🧱 **Web Server**: Installs Apache2 and PHP (`libapache2-mod-php`).
-* 🌐 Optionally enables **UFW** firewall rules for Apache (requires manual explicit enable).
-* 🧩 Automatically sources environment files for `nvm` and `uv`.
+- 🎨 **Terminal setup**: Installs Oh My Zsh, Agnoster theme with Powerline fonts, and essential Zsh plugins (`zsh-autosuggestions`, `zsh-syntax-highlighting`, `fast-syntax-highlighting`, `zsh-autocomplete`). Safely updates `.zshrc` with a backup.
+- 📦 **Base tools**: Updates apt repositories and installs `curl`, `git`, and build tools.
+- 🐳 **Docker**: Installs Docker and `docker-compose`, configures `docker` group for current user.
+- 🟢 **Node.js**: Installs Node 24 and npm 11 using `nvm`.
+- 🐍 **Python manager**: Installs `uv` from Astral.
+- 🧱 **Web Server**: Installs Apache2 and PHP (`libapache2-mod-php`).
+- 🌐 Optionally enables **UFW** firewall rules for Apache (requires manual explicit enable).
+- 🧩 Automatically sources environment files for `nvm` and `uv`.
 
 ---
 
@@ -47,7 +42,7 @@ zsh
 
 | Requirement        | Description                                 |
 | ------------------ | ------------------------------------------- |
-| 🖥️ **OS**         | Debian / Ubuntu (requires `apt`)            |
+| 🖥️ **OS**          | Debian / Ubuntu (requires `apt`)            |
 | 🔑 **Permissions** | `sudo` privileges for installing packages   |
 | 🌐 **Internet**    | Active connection for downloads and cloning |
 | 💾 **Disk space**  | ~1–2 GB recommended                         |
@@ -105,5 +100,4 @@ MIT License © 2025 Phương Đinh Đoàn Xuân
 
 ---
 
-> ✨ *Make your Linux terminal not just functional, but fascinating — and ready for serious development.*
-
+> ✨ _Make your Linux terminal not just functional, but fascinating — and ready for serious development._
