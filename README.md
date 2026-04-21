@@ -29,7 +29,7 @@ zsh
 
 - 🎨 **Terminal setup**: Installs Oh My Zsh, Agnoster theme with Powerline fonts, and essential Zsh plugins (`zsh-autosuggestions`, `zsh-syntax-highlighting`, `fast-syntax-highlighting`, `zsh-autocomplete`). Safely updates `.zshrc` with a backup.
 - 📦 **Base tools**: Updates apt repositories and installs `curl`, `git`, and build tools.
-- 🐳 **Docker**: Installs Docker and `docker-compose`, configures `docker` group for current user.
+- 🐳 **Docker**: Installs Docker and **Docker Compose V2** (`docker compose`), configures `docker` group for current user.
 - 🟢 **Node.js**: Installs Node 24 and npm 11 using `nvm`.
 - 🐍 **Python manager**: Installs `uv` from Astral.
 - 🧱 **Web Server**: Installs Apache2 and PHP (`libapache2-mod-php`).
@@ -81,7 +81,7 @@ rm -rf ~/.oh-my-zsh ~/.zshrc ~/.zshrc.backup
 ### Remove Common Packages (optional)
 
 ```bash
-sudo apt remove --purge docker.io docker-compose apache2 php -y
+sudo apt remove --purge docker.io docker-compose-v2 apache2 php -y
 sudo rm -rf ~/.nvm ~/.uv
 ```
 

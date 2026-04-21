@@ -67,7 +67,7 @@ fi
 
 # 3. Docker
 echo "🐳 Installing Docker..."
-$SUDO apt install -y docker.io docker-compose
+$SUDO apt install -y docker.io docker-compose-v2
 $SUDO systemctl enable --now docker
 if ! id -nG "$USER" | grep -qw docker; then
   $SUDO usermod -aG docker "$USER"
